@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap');
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            background-color: rgb(20, 53, 44);
+        }
+
+        .Container{
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(42, 48, 46, 0.542);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .Container.aparecer {
+            opacity: 100%;
+            animation: aparecer 5s normal;
+        }
+
+        .Container.desaparecer {
+            opacity: 0%;
+            animation: desaparecer 5s normal;
+        }
+
+        #Logo{
+            position: absolute;
+            font-size: 10vw;
+            text-transform: uppercase;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #Logo::after{
+            content: "Flappers";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0%;
+            height: 100%;
+
+            color: rgb(0, 255, 81);
+            overflow: hidden;
+        }
+
+        #Logo.aparecer::after{
+            animation: logoAnimation 6s linear forwards;
+        }
+
+        @keyframes aparecer {
+            0% { opacity: 0%;}
+            60% { opacity: 40%;} 
+            100% { opacity: 100%;} 
+        }
+
+        @keyframes desaparecer {
+            0% { opacity: 100%;}
+            100% { opacity: 0%;} 
+        }
+
+        @keyframes logoAnimation{
+            0%, 50% {width: 0%;}
+            100% {width: 100%;}
+        }
+    </style>
+
+    <title>The Grearster Hunter</title>
+</head>
+<body>
+    <div class="Container aparecer"> 
+        <p id="Logo" class="aparecer"> Flappers </p>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+        import { getDocs, collection, addDoc, getFirestore } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js"
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+        apiKey: "AIzaSyAHnTM21JLSLzp5mZIhFsimtKjUiIRVM3I",
+        authDomain: "flappers-8f098.firebaseapp.com",
+        projectId: "flappers-8f098",
+        storageBucket: "flappers-8f098.appspot.com",
+        messagingSenderId: "818410072736",
+        appId: "1:818410072736:web:549334d06d13f24791b7c5"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app)
+        const idLocal = localStorage.getItem('Player-ID')
+
+        const container = document.querySelector('.Container')
+
+        if (idLocal == "undefined" || idLocal == null){
+            try {
+                const valoresPlayers = await addDoc(collection(db, "players"), {
+                    email: "",
+                    nivel: 0,
+                    exp: 0,
+                    money: 0
+                });
+
+                localStorage.setItem('Player-ID', valoresPlayers.id)
+
+            } catch (e) {
+                console.error("Error adding document: ", e);
+            }
+        }
+
+        setTimeout(() =>{
+            container.classList.add("desaparecer")
+        },7000)
+    </script>
+</body>
+</html>
