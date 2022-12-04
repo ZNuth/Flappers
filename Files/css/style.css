@@ -166,7 +166,7 @@ body{
     bottom: 250px;
     left: 52px;
 
-    background-image: url('../images/falcao_Foda.png');
+    background-image: url('../../images/falcao_Foda.png');
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -182,7 +182,7 @@ body{
 
 
 #Rato.animacao{
-    background-image: url('../images/rato.png');
+    background-image: url('../../images/rato.png');
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -228,13 +228,13 @@ body{
 
 @keyframes movimentacao-ave {
     0% {
-        background-image: url('../images/falcao_foda.png');
+        background-image: url('../../images/falcao_foda.png');
     }
     50% {
-        background-image: url('../images/falcao2_foda.png');
+        background-image: url('../../images/falcao2_foda.png');
     }
     100% {
-        background-image: url('../images/falcao_foda.png');
+        background-image: url('../../images/falcao_foda.png');
     }
 }
 
@@ -253,4 +253,59 @@ body{
 @keyframes boost-vida{
     0% { border:  5px solid rgb(86, 29, 23);}
     100% {border: 5px solid rgb(33, 41, 32);}
+}
+
+#Save{
+    width: 85px;
+    height: 85px;
+
+    border: 5px solid blue;
+    border-radius: 55px;
+
+    display: none;
+    position: absolute;
+
+    right: 10px;
+    bottom: 10px;
+}
+
+#Save::after{
+    content: "";
+    width: 66px;
+    height: 66px;
+
+    border: 5px solid rgba(41, 173, 255, 0.508);
+    border-radius: 55px;
+
+    display: flex;
+    position: absolute;
+
+    right: 0px;
+    bottom: 0px;
+
+    animation: aparecerDesaparecer 200ms 1s infinite forwards;
+}
+
+
+#Save::before{
+    content: "";
+    width: 85px;
+    height: 85px;
+
+    border: 5px solid rgba(0, 157, 255, 0.508);
+    border-radius: 55px;
+
+    position: absolute;
+
+    display: flex;
+    right: -10px;
+    bottom: -10px;
+
+    animation: aparecerDesaparecer 200ms 1s infinite forwards;
+}
+
+@keyframes aparecerDesaparecer {
+    0% { opacity: 0%;}
+    50% { pacity: 100%;}
+    100% { pacity: 0%;}
 }

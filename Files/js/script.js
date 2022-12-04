@@ -48,6 +48,8 @@ var ultimoComando
 var percaEnergia
 var resistenciaAr
 
+var save
+
 function generateEntre(min, max) {
   return Math.floor((Math.random() * (max - min)) + min);
 }
@@ -77,6 +79,7 @@ const iniciarJogo = () => {
   eDia = "Dia"
 
   ultimoComando = 0
+  save = 18000
 
   xInimigo = generateEntre(5, visualViewport.height - 5)
   spawnInimigo = generateEntre(1214, 1897)
@@ -176,7 +179,7 @@ const ataque = (Stam, Cacador = Player, Presa = ratoPRESA, direcao = "left") => 
   var WidthCacador
 
   Cacador.classList.remove("animacao")
-  Cacador.style.backgroundImage = "url('../images/falcao3_Foda.png')";
+  Cacador.style.backgroundImage = "url('../../images/falcao3_Foda.png')";
 
   const investida = setInterval(() => {
     PresaX = +window.getComputedStyle(Presa).left.replace("px", "")
@@ -294,6 +297,7 @@ iniciarJogo()
 
 // Contador = 1000 -> 10s
 // 1s -> 100
+
 
 const jogo = setInterval(() => {
   // Aumento no Contador / Temporizador do jogo
@@ -418,6 +422,17 @@ const jogo = setInterval(() => {
     }
   }
 
+  // Save
+  if (contador > save){
+    document.getElementById("Save").style.display = "flex"
+
+    setTimeout(() => {
+      document.getElementById("Save").style.display = "none"
+      save = contador + 18000
+    }, 12000)
+
+  }
+
   // Removendo o Rato e gerando um novo tempo - Rato passando da tela
   if (ratoPRESA.offsetLeft >= parseInt(visualViewport.width)) {
     spawnRato = parseInt((contador + (678 * (Nivel + 1))) + ((porcentVida * 5) + tempoMinRato))
@@ -438,11 +453,11 @@ const jogo = setInterval(() => {
   }
 
   // Conferindo se não possui mais vida / se perdeu
-  if (Vida <= 0) {
+  if (Vida <= 0 && !Player.classList.contains("imortal")) {
     Player.style.bottom = `${ArvoreAltura + 60}px`
     ElemVida.setAttribute("value", 1)
     
-    Player.style.backgroundImage = "url('../images/falcao_Foda.png')";
+    Player.style.backgroundImage = "url('../../images/falcao_Foda.png')";
     Player.classList.remove('animacao')
     arvoreOBS.classList.remove('animacao')
     ratoPRESA.classList.remove('animacao')

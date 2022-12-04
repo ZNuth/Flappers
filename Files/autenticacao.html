@@ -84,45 +84,13 @@
     </div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
-        import { getDocs, collection, addDoc, getFirestore } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js"
-
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-        apiKey: "AIzaSyAHnTM21JLSLzp5mZIhFsimtKjUiIRVM3I",
-        authDomain: "flappers-8f098.firebaseapp.com",
-        projectId: "flappers-8f098",
-        storageBucket: "flappers-8f098.appspot.com",
-        messagingSenderId: "818410072736",
-        appId: "1:818410072736:web:549334d06d13f24791b7c5"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app)
-        const idLocal = localStorage.getItem('Player-ID')
+        import {} from './js/firebase.js'
 
         const container = document.querySelector('.Container')
-
-        if (idLocal == "undefined" || idLocal == null){
-            try {
-                const valoresPlayers = await addDoc(collection(db, "players"), {
-                    email: "",
-                    nivel: 0,
-                    exp: 0,
-                    money: 0
-                });
-
-                localStorage.setItem('Player-ID', valoresPlayers.id)
-
-            } catch (e) {
-                console.error("Error adding document: ", e);
-            }
-        }
-
         setTimeout(() =>{
             container.classList.add("desaparecer")
-        },7000)
+            window.location = "./index.html"
+        },1000000)
     </script>
 </body>
 </html>

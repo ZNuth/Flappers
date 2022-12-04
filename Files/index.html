@@ -3,13 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./js/index.js" defer></script>
 
     <title>The Grearster Hunter</title>
 </head>
 <body>
+    <div class="Container">
+        <li class="Modos">
+            <div class="Modo" id="Historia" >
+                <div class="imagem"></div>
+                <button>Historia</button>
+            </div>
+            <div class="Modo" id="Livre">
+                <div class="imagem"></div>
+                <button>Livre</button>
+            </div>
+            <div class="Modo" id="Multiplayer">
+                <div class="imagem"></div>
+                <button>Multiplayer</button>
+            </div>
+        </li>
 
-    <script>
-        window.location = "./autenticacao.html"
-    </script>
+        <div id="ContainerHistoria" class="ContainerModo"></div>
+        <div id="ContainerLivre" class="ContainerModo">
+            <img src="../images/falcao_Foda.png" alt="pre-visualizacao">
+            <a href="./pags/livre.html">Play</a>
+
+        </div>
+        <div id="ContainerMultiplayer" class="ContainerModo"></div>
+
+
+    </div>
 </body>
 </html>

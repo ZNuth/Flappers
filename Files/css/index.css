@@ -1,0 +1,128 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(0, 90, 66);
+    display: flex;
+}
+
+.Container{
+    width: 100%;
+    height: 70%;
+    background-color: rgba(0, 244, 163, 0.315);
+
+    border-top: 7px solid rgb(0, 58, 43);
+    border-bottom: 7px solid rgb(0, 58, 43);
+
+    position: absolute;
+    margin: 10% 0% 15% 0%;
+}
+
+.Modos{
+    width: 90%;
+    height: 90%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    margin: 2.5% 2.5% 2.5% 2.5%;
+    opacity: 100%;
+}
+
+.Modos.Disabled{
+    display: none;
+}
+
+.Modo{
+    width: 100%;
+    height: 90%;
+    opacity: 70%;
+
+    display: flex;
+    margin: 0% 2.5% 0% 2.5%;
+    
+    align-items: flex-end;
+    align-content: stretch;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    border-top: 7px solid rgb(0, 58, 43);
+    border-bottom: 7px solid rgb(0, 58, 43);
+
+    border-radius: 50px;
+    background-color: rgba(66, 74, 72, 0.601);
+}   
+
+.imagem {
+    background-color:  antiquewhite;
+    height: 60%;
+    width: 70%;
+
+    border-radius: 15px;
+}
+
+.Modo button{
+    background-color: transparent;
+    color: antiquewhite;
+    font-size: 1.6rem;
+    font-weight: bolder;
+
+    height: 35px;
+    width: 90%;
+    border: none;
+    margin-bottom: 30px;
+}
+
+.Modo.Disabled{
+    opacity: 50%;
+}
+
+.Modo:not(.Disabled):hover{
+    opacity: 100%;
+}
+
+.ContainerModo{
+    display: none;
+
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.ContainerModo a{
+    background-color: gray;
+    color: antiquewhite;
+    font-size: 1.6rem;
+    font-weight: bolder;
+
+    height: 55px;
+    width: 35%;
+    border: none;
+    border-radius: 30px;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+
+.ContainerModo img{
+    display: flex;
+    
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    border-radius: 50px;
+    border: 15px solid rgb(0, 58, 43);
+    background-color: antiquewhite;
+}
