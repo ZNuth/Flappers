@@ -1,5 +1,7 @@
 import {  initializeApp } from  "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js"
-export {firebase}
+import {setDoc, getDoc, doc, getDocs, collection, addDoc, getFirestore } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js"
+
+export {setDoc, getDocs, doc, getDoc, collection, addDoc, db}
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -12,4 +14,5 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const firebase = await initializeApp(firebaseConfig)
+const firebase = initializeApp(firebaseConfig)
+const db = getFirestore(firebase)

@@ -5,18 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="./css/index.css">
-    <link rel="stylesheet" href="./css/autenticacao.css">
-    <script src="./js/index.js" defer></script>
-    <script src="./js/getFirebase.js" type="module"></script>
+    <script src="./js/index.js" type="module" defer></script>
 
     <title>The Grearster Hunter</title>
 </head>
 <body>
-    
-    <div class="Tela aparecer"> 
-        <p id="Logo" class="aparecer"> Flappers </p>
-    </div>
-
     <div class="Container">
         <li class="Modos">
             <div class="Modo" id="Historia" >
@@ -38,9 +31,28 @@
             <img src="../images/falcao_Foda.png" alt="pre-visualizacao">
             <a href="./pags/livre.html">Play</a>
 
+            <img src="../images/personIcon.png" class="Login" status="fechado"></img>
         </div>
-        <div id="ContainerMultiplayer" class="ContainerModo"></div>
 
+        <div class="ContainerLogin" formaAcesso="Login" >
+            <h4> Realizar Login </h4>
+            <div>
+                <span> Usuário </span> 
+                <input type="text" id="usuario" value="">
+            </div>
+
+            <div>
+                <span> Senha </span> 
+                <input type="password" id="senha" value="">
+            </div>
+
+            <div>
+                <button class="atual" value="Login"> Logar </button>
+                <button value="Cadastro"> Cadastrar </button>
+            </div>
+        </div>
+
+        <div id="ContainerMultiplayer" class="ContainerModo"></div>
 
     </div>
 </body>
