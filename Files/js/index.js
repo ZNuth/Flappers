@@ -3,6 +3,7 @@ const ModoLivre = document.getElementById("Livre")
 const ModoMultiplayer = document.getElementById("Multiplayer")
 const Modos = document.querySelectorAll(".Modo")
 
+
 ModoHistoria.classList.add("Disabled")
 ModoMultiplayer.classList.add("Disabled")
 

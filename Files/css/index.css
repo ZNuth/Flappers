@@ -20,6 +20,7 @@ body{
     border-top: 7px solid rgb(0, 58, 43);
     border-bottom: 7px solid rgb(0, 58, 43);
 
+    display: none;
     position: absolute;
     margin: 10% 0% 15% 0%;
 }

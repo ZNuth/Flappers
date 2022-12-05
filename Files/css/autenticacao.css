@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(20, 53, 44);
+}
+
+.Tela{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(42, 48, 46, 0.542);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Tela.aparecer {
+    opacity: 100%;
+    animation: aparecer 5s normal;
+}
+
+.Tela.desaparecer {
+    opacity: 0%;
+    animation: desaparecer 5s normal;
+}
+
+#Logo{
+    position: absolute;
+    font-size: 10vw;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+}
+
+#Logo::after{
+    content: "Flappers";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0%;
+    height: 100%;
+
+    color: rgb(0, 255, 81);
+    overflow: hidden;
+}
+
+#Logo.aparecer::after{
+    animation: logoAnimation 6s linear forwards;
+}
+
+@keyframes aparecer {
+    0% { opacity: 0%;}
+    60% { opacity: 40%;} 
+    100% { opacity: 100%;} 
+}
+
+@keyframes desaparecer {
+    0% { opacity: 100%;}
+    100% { opacity: 0%;} 
+}
+
+@keyframes logoAnimation{
+    0%, 50% {width: 0%;}
+    100% {width: 100%;}
+}
