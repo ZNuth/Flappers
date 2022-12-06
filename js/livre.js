@@ -3,7 +3,6 @@ const Player = document.getElementById("Ave")
 const Inimigo = document.querySelector("#Ave.inimigo")
 const arvoreOBS = document.getElementById("Arvore")
 const ratoPRESA = document.getElementById("Rato")
-const botao = document.getElementById("reiniciar")
 
 const ElemNivel = document.getElementById("Nivel")
 var Nivel = ElemNivel.getAttribute("value")
@@ -48,15 +47,15 @@ var ultimoComando
 var percaEnergia
 var resistenciaAr
 
-var save
+var saveTime
 
 function generateEntre(min, max) {
   return Math.floor((Math.random() * (max - min)) + min);
 }
 
 const iniciarJogo = () => {
-  ElemNivel.setAttribute("value", 0)
-  ElemExp.setAttribute("value", 0)
+  ElemNivel.setAttribute("value", localStorage.getItem('nivel'))
+  ElemExp.setAttribute("value", localStorage.getItem('exp'))
   ElemExp.setAttribute("value-max", 500)
 
   ElemVida.setAttribute("value", 155)
@@ -79,7 +78,7 @@ const iniciarJogo = () => {
   eDia = "Dia"
 
   ultimoComando = 0
-  save = 18000
+  saveTime = 18000
 
   xInimigo = generateEntre(5, visualViewport.height - 5)
   spawnInimigo = generateEntre(1214, 1897)
@@ -89,7 +88,8 @@ const iniciarJogo = () => {
   Inimigo.style.left = "100vw"
   Player.style.left = "52px"
   Player.style.bottom = "40vh"
-  botao.style.display = "none"
+
+  document.querySelector(".BoxInfoDeath").style.display = "none"
 }
 
 const conferirEstamania = (StamNecessario) => {
@@ -98,7 +98,8 @@ const conferirEstamania = (StamNecessario) => {
     ElemStam.setAttribute("value", parseInt(Stam) - StamNecessario)
     return true
   } else {
-    alert("Você não possui estamina suficente")
+    ElemStam.classList.add("Insuficiente")
+    setTimeout(() => { ElemStam.classList.remove("Insuficiente")}, 3000)
     return false
   }
 }
@@ -208,7 +209,7 @@ const ataque = (Stam, Cacador = Player, Presa = ratoPRESA, direcao = "left") => 
 
       if (Presa == Player && contador > tempo_imunidade) {
         tempoExpPassivo += 250
-        tempo_imunidade = contador + 100
+        tempo_imunidade = contador + 200
         ElemVida.setAttribute("value", Vida - Math.floor(15 * (Nivel + 1), 35 * (Nivel + 1)))
       }
 
@@ -269,6 +270,15 @@ const dash = (Stam, Alvo = Player, direcao = "left", max = 45, velocidade = 32) 
   }, velocidade)
 }
 
+const salvar = () => {
+  document.getElementById("Save").style.display = "flex"
+  localStorage.setItem("exp", Exp);
+  localStorage.setItem("nivel", Nivel);
+
+  setTimeout(() => {
+    document.getElementById("Save").style.display = "none"
+  }, 12000)
+}
 
 document.addEventListener("keydown", (e) => {
   const keyName = event.key
@@ -292,12 +302,18 @@ document.addEventListener("keydown", (e) => {
   }
 })
 
-reiniciar.addEventListener("click", iniciarJogo)
+document.getElementById("HomePag").onclick = () => {
+  window.location = "../index.html"
+}
+
+document.getElementById("ReturnGame").onclick = () => {
+  iniciarJogo()
+}
+
 iniciarJogo()
 
 // Contador = 1000 -> 10s
 // 1s -> 100
-
 
 const jogo = setInterval(() => {
   // Aumento no Contador / Temporizador do jogo
@@ -423,14 +439,9 @@ const jogo = setInterval(() => {
   }
 
   // Save
-  if (contador > save){
-    document.getElementById("Save").style.display = "flex"
-
-    setTimeout(() => {
-      document.getElementById("Save").style.display = "none"
-      save = contador + 18000
-    }, 12000)
-
+  if (contador > saveTime){
+    salvar()
+    save = contador + 18000
   }
 
   // Removendo o Rato e gerando um novo tempo - Rato passando da tela
@@ -448,12 +459,12 @@ const jogo = setInterval(() => {
       ElemStam.style.width = `${porcentStam}%`
 
       tempoExpPassivo += 500
-      tempo_imunidade = contador + 200
+      tempo_imunidade = contador + 300
     }
   }
 
   // Conferindo se não possui mais vida / se perdeu
-  if (Vida <= 0 && !Player.classList.contains("imortal")) {
+  if (Vida <= 0 && !Player.classList.contains("1m0rt4l")) {
     Player.style.bottom = `${ArvoreAltura + 60}px`
     ElemVida.setAttribute("value", 1)
     
@@ -462,9 +473,10 @@ const jogo = setInterval(() => {
     arvoreOBS.classList.remove('animacao')
     ratoPRESA.classList.remove('animacao')
     Inimigo.classList.remove('animacao')
+    salvar()
 
-    botao.style.display = "flex"
     alert(" ! Você Perdeu ! \n Tente Novamente")
+    document.querySelector(".BoxInfoDeath").style.display = "flex"
   }
 }, 7)
 

@@ -8,31 +8,45 @@ body{
     background-color: rgb(43, 107, 13);
 }
 
-#reiniciar{
-    width: 200px;
-    height: 70px;
+.BoxInfoDeath{
+    width: 160px;
+    height: 120px;
 
-    background-color: rgb(146, 41, 7);
-    border: solid 5px rgba(40, 33, 33, 0.774);
-    border-radius: 20px;
-
-    font-size: 1.6rem;
-    font-family: monospace;
-    font-weight: bold;
-    color:rgb(255, 255, 255);
-
-    justify-content: center;
+    position: absolute;
+    display: flex;
+    
+    flex-direction: row;
     align-items: center;
+    justify-content: space-around;
 
-    position: relative;
-    display: none;
-
-    top: 50vh;
-    left: 50vh;
+    top: calc(50vh - 60px);
+    left: calc(50vw - 80px);
 }
 
-#reiniciar:hover{
-    background-color: rgb(190, 55, 9);
+
+#HomePag{
+    width: 40%;
+    height: 40%;
+
+    border: none;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+#ReturnGame{
+    width: 30%;
+    height: 30%;
+
+    border: none;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.BoxInfoDeath img:hover{
+    transform: scale(120%);
     cursor: pointer;
 }
 
@@ -92,6 +106,7 @@ body{
     padding: 3px;
 }
 
+
 #BoxVida{
     width: 100%;
     height: 25px;
@@ -127,6 +142,11 @@ body{
     position: relative;
     display: flex;
     background-color: rgb(246, 195, 12);
+}
+
+.Stam.Insuficiente{
+    background-color: rgb(150, 89, 9);
+    animation: piscar 700ms infinite ease
 }
 
 #Rato {
@@ -180,9 +200,8 @@ body{
     transform: rotateY(180deg);
 }
 
-
 #Rato.animacao{
-    background-image: url('../../images/rato.png');
+    background-image: url('../images/rato.png');
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -259,53 +278,39 @@ body{
     width: 85px;
     height: 85px;
 
-    border: 5px solid blue;
     border-radius: 55px;
+    border: 3px dashed blue;
+
+    border-left: 3px dashed  aqua;
+    border-bottom: 3px dashed  aqua;
 
     display: none;
     position: absolute;
 
     right: 10px;
     bottom: 10px;
+
+    animation: girar 1s ease-in-out infinite;
 }
 
-#Save::after{
-    content: "";
-    width: 66px;
-    height: 66px;
-
-    border: 5px solid rgba(41, 173, 255, 0.508);
-    border-radius: 55px;
-
-    display: flex;
-    position: absolute;
-
-    right: 0px;
-    bottom: 0px;
-
-    animation: aparecerDesaparecer 200ms 1s infinite forwards;
+@keyframes girar{
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-
-#Save::before{
-    content: "";
-    width: 85px;
-    height: 85px;
-
-    border: 5px solid rgba(0, 157, 255, 0.508);
-    border-radius: 55px;
-
-    position: absolute;
-
-    display: flex;
-    right: -10px;
-    bottom: -10px;
-
-    animation: aparecerDesaparecer 200ms 1s infinite forwards;
-}
 
 @keyframes aparecerDesaparecer {
     0% { opacity: 0%;}
     50% { pacity: 100%;}
     100% { pacity: 0%;}
+}
+
+@keyframes piscar{
+    0% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
 }

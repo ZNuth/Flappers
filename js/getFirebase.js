@@ -1,6 +1,6 @@
 
-import {getDocs,getDoc, collection, addDoc, db,doc} from  "./firebase.js";
-export {conferir, setDadosLocal}
+import {getDocs, getDoc, collection, addDoc, db, doc} from  "./firebase.js";
+export {conferir, setDadosLocal, logarUser}
 
 async function conferir() {
     const idLocal = localStorage.getItem('Player-ID');
@@ -30,7 +30,6 @@ async function conferir() {
     }
 }
 
-
 async function setDadosLocal(idPlayer){
     const docRef = doc(db, "players", idPlayer);
     const docSnap = await getDoc(docRef);
@@ -43,17 +42,25 @@ async function setDadosLocal(idPlayer){
     }
 }
 
+async function logarUser(user,password){
+    const querySnapshot = await getDocs(collection(db, "players"));
+    var situacao = "Usuário Não Cadastrado!"
+    querySnapshot.forEach((doc) => {
+        const data = doc.data()
+        const userSave =  data["user"]
+        const passwordSave = data["password"]
 
-async function carregarDadosLocal(idPlayer,data){
-    const docRef = doc(db, "players", idPlayer);
-    const docSnap = await getDoc(docRef);
-
-    for (const key in data){
-        if (data[key] != null){
-            localStorage.setItem(key, data[key]);
+        if (user == userSave){situacao = "Senha Incorreta!"}
+        if (user == userSave && password == passwordSave){
+            for (const key in data){
+                if (key != "user" && key != "password"){
+                    localStorage.setItem(key, data[key]);
+                }
+            }
+            situacao = "Login Efetuado com Sucesso!"
         }
-    }
+    });
+
+    alert(situacao)
+    return situacao
 }
-
-
-

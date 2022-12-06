@@ -19,6 +19,9 @@
         import { conferir, setDadosLocal } from "../js/getFirebase.js"
         conferir()
         setDadosLocal(localStorage.getItem('Player-ID'))
+
+        setTimeout(() => {
+        window.location = "../index.html"}, 7000)
     </script>
 </body>
 </html>

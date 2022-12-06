@@ -1,4 +1,5 @@
-import {cadastrarUser} from "./sendFirebase.js"
+import {cadastrarUser, atualizarDados} from "./sendFirebase.js"
+import {logarUser} from "./getFirebase.js"
 
 const ModoHistoria = document.getElementById("Historia")
 const ModoLivre = document.getElementById("Livre")
@@ -7,6 +8,9 @@ const Modos = document.querySelectorAll(".Modo")
 
 ModoHistoria.classList.add("Disabled")
 ModoMultiplayer.classList.add("Disabled")
+
+
+atualizarDados()
 
 Modos.forEach((elem) => {
     elem.addEventListener("click",() => {
@@ -58,15 +62,22 @@ const valoresInputs = () => {
 }
 
 const Login = () => {
-    console.log("REALIZANDO LOGIN", valoresInputs())
+    const inputs = valoresInputs()
+    logarUser(inputs.user,inputs.password).then(txt =>{ 
+        
+        if (txt == "Login Efetuado com Sucesso!"){
+            document.querySelector('.ContainerLogin').style.display = "none"
+            buttonLogin.src = "../../images/personIcon.png"
+            buttonLogin.setAttribute("status","Logado")
+            buttonLogin.style.display = "none"
+        }
+    })
 }
-
 
 const Cadastro = () => {
     const inputs = valoresInputs()
     cadastrarUser(inputs.user,inputs.password)
 }
-
 
 
 const buttons = document.querySelectorAll(".ContainerLogin button")
