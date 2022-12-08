@@ -2,58 +2,88 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <title>Flappers: A Conquista dos Ceús</title>
+
     <link rel="stylesheet" href="./css/index.css">
     <script src="./js/index.js" type="module" defer></script>
-
-    <title>The Grearster Hunter</title>
 </head>
 <body>
-    <div class="Container">
-        <li class="Modos">
-            <div class="Modo" id="Historia" >
-                <div class="imagem"></div>
-                <button>Historia</button>
+    <div class="Container" id="Menu">
+        <div id="Informacoes" class="Container">
+            <div id="Perfil" status="Nao Logado"> 
+                <img src="./images/personIcon.png" alt="Person">
+                Logar 
             </div>
-            <div class="Modo" id="Livre">
-                <div class="imagem"></div>
-                <button>Livre</button>
-            </div>
-            <div class="Modo" id="Multiplayer">
-                <div class="imagem"></div>
-                <button>Multiplayer</button>
-            </div>
-        </li>
 
-        <div id="ContainerHistoria" class="ContainerModo"></div>
-        <div id="ContainerLivre" class="ContainerModo">
-            <img src="../images/falcao_Foda.png" alt="pre-visualizacao">
-            <a href="./pags/livre.html">Play</a>
+            <div id="PlayerInfo">
+                <span class="Nivel">0</span>
+                <div id="BoxExp"> 
+                    <span style="font-weight: 750; margin-right: 5px;">Exp:</span> 
+                    <span id="exp">0000</span>
+                </div>
+            </div>
+            
+            <div id="BoxMoney">
+                <img src="./images/coinIcon.png" alt="Coin">
+                <span style="font-weight: 750; margin-right: 5px;">Coins:</span> 
+                <span id="money">0</span>
+            </div>
 
-            <img src="../images/personIcon.png" class="Login" status="fechado"></img>
+            <div id="BoxShop">
+                <img src="./images/shopcarIcon.png" alt="ShopCar">
+                Shop
+            </div>
+
+            <div id="Configuracao">
+                <img src="./images/settingsIcon.png" alt="Settings">
+                <span> Ajustes </span>
+            </div>
+            
+            <section id="InfoADD"></section>
         </div>
 
-        <div class="ContainerLogin" formaAcesso="Login" >
-            <h4> Realizar Login </h4>
-            <div>
-                <span> Usuário </span> 
-                <input type="text" id="usuario">
-            </div>
+        <section id="Conteudo">
+            <button id="Jogar" onclick="window.location = './pags/livre.html'"> Jogar </button>
+        </section>
 
-            <div>
-                <span> Senha </span> 
-                <input type="password" id="senha">
-            </div>
+        <div id="Modos" class="Container">
+            <span id="Historia"> Historia </span>
+            <span id="Livre" class="selecionado"> Livre </span>
+            <span id="Multiplayer"> Multiplayer </span>
+        </div>
+    </div>
+    
+    <div id="Mensagem"></div>
 
-            <div>
-                <button class="atual" value="Login"> Logar </button>
-                <button value="Cadastro"> Cadastrar </button>
-            </div>
+    <div id="PerfilConteudo" class="ContainerLogin" style="display: none;" formaAcesso="Login">
+        <h4 style="font-weight: 600;"> Realizar Login </h4>
+        <div>
+            <span> Usuário </span> 
+            <input type="text" id="usuario">
         </div>
 
-        <div id="ContainerMultiplayer" class="ContainerModo"></div>
+        <div>
+            <span> Senha </span> 
+            <input type="password" id="senha">
+        </div>
 
+        <div>
+            <button id="logar" class="atual" value="Login"> Logar </button>
+            <button id="cadas" value="Cadastro"> Cadastrar </button>
+        </div>
+    </div> 
+    <div id="ConfiguracaoConteudo" style="display: none;" >
+        <div>
+            <h4 style="font-weight: 600; margin-right: 10px;">Volume:</h4>  
+            <input style="width: 60%;" type="range" name="" id="Volume">
+        </div>
+        <h4 style="font-weight: 600; margin-top: 10px;">Tema:</h4> 
+        <div class="Inputs">       
+            <input type="radio" name="tema" id="Tema" checked> Verde 
+            <input type="radio" name="tema" id="Tema"> Roxo
+        </div>
     </div>
 </body>
 </html>

@@ -1,102 +1,135 @@
 import {cadastrarUser, atualizarDados} from "./sendFirebase.js"
 import {logarUser} from "./getFirebase.js"
 
-const ModoHistoria = document.getElementById("Historia")
-const ModoLivre = document.getElementById("Livre")
-const ModoMultiplayer = document.getElementById("Multiplayer")
-const Modos = document.querySelectorAll(".Modo")
+(function (){
+    const modos = document.querySelectorAll("#Modos span")
+    modos.forEach(modosButtons => {
+        modosButtons.onclick = () => {
+            modos[0].classList.remove("selecionado")
+            modos[1].classList.remove("selecionado")
+            modos[2].classList.remove("selecionado")
 
-ModoHistoria.classList.add("Disabled")
-ModoMultiplayer.classList.add("Disabled")
-
-
-atualizarDados()
-
-Modos.forEach((elem) => {
-    elem.addEventListener("click",() => {
-        if ("Disabled" == elem.classList[1]){
-            alert("Modo não Disponivel")
-        } else{
-            document.querySelector(".Modos").classList.add("Disabled")
-            document.querySelector(`#Container${elem.id}`).style.display = "flex"
+            modosButtons.classList.add("selecionado")
         }
-    })
-})
-
-const buttonLogin = document.querySelector('.Login')
-buttonLogin.onclick = () => {
-    if (buttonLogin.getAttribute("status") == "fechado"){
-        document.querySelector('.ContainerLogin').style.display = "flex"
-        buttonLogin.src = "../../images/x.png"
-        buttonLogin.setAttribute("status","aberto")
-    } else  if (buttonLogin.getAttribute("status") == "aberto"){
-        document.querySelector('.ContainerLogin').style.display = "none"
-        buttonLogin.src = "../../images/personIcon.png"
-        buttonLogin.setAttribute("status","fechado")
-    }
-}
-
-const inputs = document.querySelectorAll(".ContainerLogin input")
-inputs.forEach((elem) => {
     
-    elem.onclick = () => {
-        (elem.parentElement).children[0].classList.add("Selecionado")
-    }
-    elem.onblur = () => {
-        if (elem.value == ""){
-        (elem.parentElement).children[0].classList.remove("Selecionado")
+        modos[0].onclick = (event) => {
+            printarMensgem("opDesen",event)
         }
-    }
-})
 
-const valoresInputs = () => {
-    const user = document.getElementById("usuario").value
-    const password = document.getElementById("senha").value
+        modos[2].onclick = (event) => {
+            printarMensgem("opDesen",event)
+        }
+    });
+
+    const infos =  document.querySelectorAll("#Informacoes div")
+    const link = document.getElementById("linkSections");
+    const conteudo = document.getElementById("InfoADD");
+
+    infos.forEach(element => {
+        element.onclick = () => {
+            conteudo.style.left = "0px"
+            try{
+                const HtmlElem = document.getElementById(`${element.getAttribute("id")}Conteudo`).innerHTML
+                conteudo.innerHTML = HtmlElem;
+                
+                conteudo.style.display = "flex"
+                conteudo.style.left =  `${element.offsetLeft}px`
+
+                if (element.getAttribute("id") == "Perfil"){
+                    const buttons = document.querySelectorAll(`#${conteudo.getAttribute("id")} button`)
+                    buttons.forEach((e) => e.onclick = () => {
+                        buttonFunction(e)
+                    })
+
+                    const inputs = document.querySelectorAll("#InfoADD input")
+                    inputs.forEach((elem) => {
+                            elem.onclick = () => {
+                                (elem.parentElement).children[0].classList.add("Selecionado")
+                            }
+                            elem.onblur = () => {
+                            if (elem.value == ""){
+                                (elem.parentElement).children[0].classList.remove("Selecionado")
+                            }
+                        }
+                    })
+                }
+            }
+            catch (e){
+                conteudo.style.display = "none"
+                console.error("Error: " + e.toString())
+            }
+        }    
+    });
+
+    const barraInfo = document.getElementById("Informacoes")
+    document.addEventListener("click",(e) => {
+        const ativador = e.target
+        if (!barraInfo.contains(ativador) && conteudo.style.display == "flex" ){
+            conteudo.style.display = "none"
+            conteudo.style.left = "0px"
+        }
+    })    
     
-    if (user == "" || password == ""){
-        alert("Não deixe nenhum dos valores vazios")
-        return false
-    } else {
-        return {user,password}
-    }
-}
-
-const Login = () => {
-    const inputs = valoresInputs()
-    logarUser(inputs.user,inputs.password).then(txt =>{ 
+    function buttonFunction (elem) {
+        const tituloTela = document.querySelector("#InfoADD h4")
+            if (tituloTela.innerHTML != `Realizar ${elem.getAttribute("value")}`){
+                tituloTela.innerHTML = `Realizar ${elem.getAttribute("value")}`
         
-        if (txt == "Login Efetuado com Sucesso!"){
-            document.querySelector('.ContainerLogin').style.display = "none"
-            buttonLogin.src = "../../images/personIcon.png"
-            buttonLogin.setAttribute("status","Logado")
-            buttonLogin.style.display = "none"
+                elem.parentNode.children[0].classList.remove("atual")
+                elem.parentNode.children[1].classList.remove("atual")
+                
+                elem.classList.add("atual")
+            } else {
+                if(elem.getAttribute("value") == "Login") {Login()}
+                if(elem.getAttribute("value") == "Cadastro") {Cadastro()}
+            }
+    }
+
+    function printarMensgem (tipo,element){
+        var txt;
+        const boxMensagem = document.getElementById("Mensagem")
+
+        if (tipo == "opDesen"){
+            txt = "Essa opção esta em desenvolvimento!"
         }
-    })
-}
 
-const Cadastro = () => {
-    const inputs = valoresInputs()
-    cadastrarUser(inputs.user,inputs.password)
-}
+        boxMensagem.style.display = "flex"
+        boxMensagem.innerHTML = txt
+        
+        var posX = element.clientX,
+            posY = element.clientY;
 
+        boxMensagem.style.left = `${posX}px`;
+        boxMensagem.style.top =`${posY}px`;        
+        
+        setTimeout(() => {
+            boxMensagem.style.display = "none"
+            boxMensagem.innerHTML = ""}, 1270)
+    }
 
-const buttons = document.querySelectorAll(".ContainerLogin button")
-buttons.forEach((elem) => {
-    const tituloTela = document.querySelector(".ContainerLogin h4")
-    elem.onclick = () => {
-        if (tituloTela.innerHTML != `Realizar ${elem.getAttribute("value")}`){
-            tituloTela.innerHTML = `Realizar ${elem.getAttribute("value")}`
-    
-            elem.parentNode.children[0].classList.remove("atual")
-            elem.parentNode.children[1].classList.remove("atual")
-            
-            elem.classList.add("atual")
+    document.getElementById("BoxShop").onclick = (event) => printarMensgem("opDesen",event)
+    document.getElementById("BoxMoney").onclick = (event) => printarMensgem("opDesen",event)
+    document.getElementById("PlayerInfo").onclick = (event) => printarMensgem("opDesen",event)
+
+    const valoresInputs = () => {
+        const user = document.getElementById("usuario").value
+        const password = document.getElementById("senha").value
+
+        if (user == "" || password == ""){
+            alert("Não deixe nenhum dos valores vazios")
+            return false
         } else {
-
-            if(elem.getAttribute("value") == "Login") {Login()}
-            if(elem.getAttribute("value") == "Cadastro") {Cadastro()}
+            return {user,password}
         }
     }
-})
-    
 
+    const Login = () => {
+        const inputs = valoresInputs()
+        logarUser(inputs.user,inputs.password)
+    }
+
+    const Cadastro = () => {
+        const inputs = valoresInputs()
+        cadastrarUser(inputs.user,inputs.password)
+    }
+})()

@@ -1,224 +1,329 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap');
-
 *{
-    margin: 0;
-    padding: 0;
+    padding: 0%;
+    margin: 0%;
     box-sizing: border-box;
+
+    font-size: small;
+    font-family: sans-serif;
+    font-weight: 400;
+}
+
+:root{
+    --lime-green: rgb(11, 175, 38);
+    --dark-green: rgb(4, 140, 27);
+
+    --color-background: rgb(46, 46, 46);
+
+    --color-primary: var(--lime-green);
+    --color-secondary: var(--dark-green);
 }
 
 body{
-    background-color: rgb(0, 90, 66);
-    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-background);
 }
 
 .Container{
-    width: 100%;
-    height: 70%;
-    background-color: rgba(0, 244, 163, 0.315);
-
-    border-top: 7px solid rgb(0, 58, 43);
-    border-bottom: 7px solid rgb(0, 58, 43);
-
-    display: flex;
-    position: absolute;
-    margin: 10% 0% 15% 0%;
-}
-
-.Modos{
-    width: 90%;
-    height: 90%;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-    margin: 2.5% 2.5% 2.5% 2.5%;
-    opacity: 100%;
-}
-
-.Modos.Disabled{
-    display: none;
-}
-
-.Modo{
-    width: 100%;
-    height: 90%;
-    opacity: 70%;
-
-    display: flex;
-    margin: 0% 2.5% 0% 2.5%;
-    
-    align-items: flex-end;
-    align-content: stretch;
-    flex-wrap: wrap;
+    display: flex; 
+    flex-direction: row;
     justify-content: center;
-    
-    border-top: 7px solid rgb(0, 58, 43);
-    border-bottom: 7px solid rgb(0, 58, 43);
-
-    border-radius: 50px;
-    background-color: rgba(66, 74, 72, 0.601);
-}   
-
-.imagem {
-    background-color:  antiquewhite;
-    height: 60%;
-    width: 70%;
-
-    border-radius: 15px;
-}
-
-.Modo button{
-    background-color: transparent;
-    color: antiquewhite;
-    font-size: 1.6rem;
-    font-weight: bolder;
-
-    height: 35px;
-    width: 90%;
-    border: none;
-    margin-bottom: 30px;
-}
-
-.Modo.Disabled{
-    opacity: 50%;
-}
-
-.Modo:not(.Disabled):hover{
-    opacity: 100%;
-}
-
-.ContainerModo{
-    height: 100%;
-    width: 100%;
-    display: none;
-
     align-items: center;
-    flex-direction: column;
+}
+
+#Menu{
+    width: 100%;
+    height: 80%;
+
+    border: none;
+
+    position: absolute;
+    margin-top: 5%;
+}
+
+#Modos{
+    width: 857px;
+    height: auto;
+
+    background-color: var(--color-secondary);
     justify-content: space-around;
-    align-content: center;
-    flex-wrap: wrap;
-}
-
-.ContainerModo a{
-    background-color: gray;
-    color: antiquewhite;
-    font-size: 1.6rem;
-    font-weight: bolder;
-
-    height: 55px;
-    width: 35%;
-    border: none;
-    border-radius: 30px;
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-}
-
-
-.ContainerModo.imagem{
-    display: flex;
-    
-    margin-top: 50px;
-    margin-bottom: 50px;
-
     border-radius: 50px;
-    border: 15px solid rgb(0, 58, 43);
-    background-color: antiquewhite;
-}
-
-.Login{
-    width: 50px;
-    height: 50px;
 
     position: absolute;
-    right: 15px;
-    top: 15px;
-    background-color: gray;
-
-    padding: 10px;
-    border: 4px solid rgb(0, 0, 0);
-    border-radius: 50px;
+    bottom: 5px;
 }
 
-.Login:hover{
-    background-color: rgb(167, 167, 167);
+#Modos span{
+    font-size: 1.2rem;
+    color: whitesmoke;
+    padding: 15px 52px 15px 52px;
+    font-weight: 500;
+}
+
+#Modos span.selecionado{
+    border: 3px solid var(--color-primary);
+    background-color: var(--color-secondary);
+    transform: scale(120%);
+    font-weight: 750;
+}
+
+#Informacoes{
+    width: 1207px;
+    height: 30px;
+
+    background-color: var(--color-primary);
+    justify-content: space-around;
+    border-radius: 1000px;
+
+    position: absolute;
+    top: 5px;
+    color: whitesmoke;
     cursor: pointer;
 }
 
-.ContainerLogin{
-    display: none;
+#Perfil{
+    height: 120%;
+    display: flex;
+    align-items: center;
+    
+    font-weight: 750;
+    background-color: var(--color-primary);
+    padding: 5px 10px 5px 10px;
+    border: 4px solid var(--color-secondary);
+    border-radius: 5px;
+    
+    z-index: 10;
+}
 
-    width: 380px;
-    height: 400px;
-    background-color: rgb(64, 64, 64);
+#Perfil img{
+    width: auto;
+    height: 90%;
+    margin-right: 15px;
+}
 
-    border: 5px solid whitesmoke;
-    border-radius: 20px;
+#PlayerInfo{
+    height: 120%;
+    display: flex;
+    align-items: center;
 
+    z-index: 100;
+}
+
+.Nivel{
+    height: 45px;
+    width: 45px;
+
+    transform: scale(125%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--color-primary);
+    border: 3px solid var(--color-secondary);
+    border-radius: 50px;
+    z-index: 10;
+}
+
+#BoxExp{
+    height: 100%;
+
+    background-color: var(--color-primary);
+    border: 4px solid var(--color-secondary) ;
+    border-left: none;
+    padding: 0px 10px 0px 20px;
+
+    display: flex;
+    align-items: center;
+
+    transform: translateX(-8px);
+}
+
+#BoxMoney {
+    height: 120%;
+    
+    display: flex;
+    align-items: center;
+
+    background-color: var(--color-primary);
+    border: 3px solid var(--color-secondary);
+    border-radius: 1000px;
+    font-size: small;
+
+    padding: 0px 15px 0px 15px;
+}
+
+#BoxMoney img{
+    height: 80%;
+    margin-right: 10px;
+}
+
+#BoxShop {
+    height: 55px;
+    width: 65px;
+    
+    transform: scale(130%);
+
+    display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    position: absolute;
 
-    top: 40px;
-    left: calc(50vw - 190px );
-    
-    padding: 15px;
-    font-size: 2rem;
-    font-weight: bold;
-    color: antiquewhite;
+    background-color: var(--color-primary);
+    border: 3px solid var(--color-secondary);
+    border-radius: 1000px;
 
+    font-weight: 600;
+    font-size: 70%;
 }
 
-.ContainerLogin span{
-    font-size: 1.2rem;
+#BoxShop img{
+    width: 40%;
+    margin: 8px 0px 4px 0px;
+}
+
+#Configuracao{
+    height: 120%;
+    
+    display: flex;
+    align-items: center;
+
+    background-color: var(--color-primary);
+    border: 4px solid var(--color-secondary);
+    border-radius: 10px;
+    
+    font-family: sans-serif;
+    padding: 0px 15px 0px 15px;
+    z-index: 10;
+}
+
+#Configuracao img{
+    height: 90%;
+    margin-right: 10px;
+}
+
+#Conteudo {
+    width: 60%;
+    height: 55%;
+
+    background-color: rgba(240, 248, 255, 0.215);
+
+    border-radius: 15px;
+    z-index: 0;
+}
+
+#InfoADD {
+    width: auto;
+    height: auto;
+
+    max-width: 220px;
+
+    background-color: var(--color-primary);
+    border: 3px solid var(--color-secondary);
+    display: none;
+    position: absolute;
+    top: 15px;
+
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+
+    padding: 25px 5px 5px 5px;
+    z-index: 5;
+}
+
+#Mensagem{
+    background-color: rgba(49, 49, 49, 0.827);
+    position: absolute;
+    border: none;
+    border-radius: 10px;
+
+    display: none;
+    align-items: center;
+    justify-items: center;
+
+    padding: 7px 15px 7px 10px;
+    color: white;
+    z-index: 100;
+}
+
+#InfoADD span{
+    font-size: 0.8;
     color: rgb(38, 36, 36);
-    font-weight: bolder;
+    font-weight: 600;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     
-    left: 55px;
+    cursor: text;
+    left: 35px;
     position: absolute;
 }
 
-
-.ContainerLogin input, button{
-    padding: 15px;
+#InfoADD input, button{
+    padding: 8px;
     width: 100%;
     border-radius: 50px;
     border: none;
     outline: none;
+    margin-top: 5px;
 }
 
-.Container input{
-    padding: 30px 15px 20px 15px;
-    font-size: 1.4rem;
+#InfoADD input{
+    padding: 10px 8px 10px 8px;
+    font-size: 1rem;
     border-radius: 10px;
 }
 
-.ContainerLogin div{
+#InfoADD div{
     width: 90%;
     display: flex;
     align-items: center;
 }
 
-.ContainerLogin button{
+#InfoADD button{
     background-color: rgb(97, 97, 97);
     color: whitesmoke;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 700;
-    margin: 10px;
     border: 2px solid white;
 }
 
-.ContainerLogin button.atual {
+#InfoADD button.atual {
     background-color: rgb(44, 42, 42);
 }
 
-.ContainerLogin .Selecionado{
-    font-size: 0.8rem;
-    margin-bottom: 45px;
+#InfoADD .Selecionado{
+    font-size: 0.7rem;
+    margin-bottom: 15px;
+}
+
+#InfoADD .Inputs{
+    display: flex;
+    align-items: flex-end;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+#Jogar{
+    width: auto;
+    height: auto;
+
+    background-color: var(--color-secondary);
+    color: whitesmoke;
+    font-size: large;
+    font-weight: 800;
+
+    position: absolute;
+    bottom: 160px;
+    left: 45%;
+
+    border: 5px solid var(--color-primary);
+
+    padding: 10px 50px 10px 50px;
+    z-index: 200;
+}
+
+#Jogar:hover{
+    transform: scale(120%);
+    cursor: pointer;
 }
